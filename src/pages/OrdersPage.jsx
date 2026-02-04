@@ -1,13 +1,18 @@
 import React from 'react';
 
-export default function OrdersPage({ orders }) {
-  if (orders.length === 0) {
+export default function OrdersPage({ orders, isAdmin, currentUserId }) {
+  // Фильтруем заказы: админ видит все, пользователь только свои
+  const displayOrders = isAdmin 
+    ? orders 
+    : orders.filter(order => order.user.id === currentUserId);
+
+  if (displayOrders.length === 0) {
     return (
       <div className="container">
         <div className="empty-state">
           <div className="empty-state-icon">📦</div>
           <h2>Нет заказов</h2>
-          <p>Здесь будут отображаться ваши заказы</p>
+          <p>{isAdmin ? 'Пока нет заказов от клиентов' : 'Здесь будут отображаться ваши заказы'}</p>
         </div>
       </div>
     );
@@ -15,9 +20,16 @@ export default function OrdersPage({ orders }) {
 
   return (
     <div className="container">
-      <h2 style={{ color: 'var(--dark-green)', marginBottom: '20px' }}>Мои заказы</h2>
+      <h2 style={{ color: 'var(--dark-green)', marginBottom: '10px' }}>
+        {isAdmin ? 'Все заказы' : 'Мои заказы'}
+      </h2>
+      {isAdmin && (
+        <p style={{ color: 'var(--medium-green)', marginBottom: '20px', fontSize: '14px' }}>
+          Всего заказов: {displayOrders.length}
+        </p>
+      )}
       
-      {orders.map((order, index) => (
+      {displayOrders.map((order, index) => (
         <div key={index} style={{
           background: 'var(--cream)',
           padding: '20px',
@@ -32,10 +44,14 @@ export default function OrdersPage({ orders }) {
           }}>
             <div>
               <div style={{ fontWeight: '700', color: 'var(--dark-green)' }}>
-                Заказ #{orders.length - index}
+                Заказ #{displayOrders.length - index}
+              </div>
+              <div style={{ fontSize: '14px', color: 'var(--medium-green)', marginTop: '5px' }}>
+                {order.user.first_name} {order.user.last_name || ''}
+                {order.user.username && ` (@${order.user.username})`}
               </div>
               <div style={{ fontSize: '14px', color: 'var(--medium-green)' }}>
-                {order.name} • {order.phone}
+                {order.phone}
               </div>
             </div>
             <div style={{
@@ -54,6 +70,17 @@ export default function OrdersPage({ orders }) {
           <div style={{ marginBottom: '10px', color: 'var(--medium-green)' }}>
             📍 {order.address}
           </div>
+
+          {order.comment && (
+            <div style={{ 
+              marginBottom: '10px', 
+              color: 'var(--medium-green)',
+              fontSize: '14px',
+              fontStyle: 'italic'
+            }}>
+              💬 {order.comment}
+            </div>
+          )}
 
           <div style={{ 
             borderTop: '1px solid var(--light-green)',

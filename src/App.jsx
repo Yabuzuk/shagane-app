@@ -11,8 +11,7 @@ import AdminPage from './pages/AdminPage';
 import { mockProducts } from './data/mockData';
 import './styles/App.css';
 
-// ID администраторов (замените на свой Telegram ID)
-const ADMIN_IDS = [407457753]; // Ваш Telegram ID
+const ADMIN_IDS = [407457753];
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('catalog');
@@ -44,7 +43,6 @@ export default function App() {
     setCart(cart.filter(item => item.id !== id));
   };
 
-  // Проверка сохраненного пользователя при загрузке
   React.useEffect(() => {
     const savedUser = localStorage.getItem('telegramUser');
     if (savedUser) {
@@ -134,7 +132,7 @@ export default function App() {
       )}
       
       {currentPage === 'orders' && (
-        <OrdersPage orders={orders} />
+        <OrdersPage orders={orders} isAdmin={isAdmin} currentUserId={user?.id} />
       )}
 
       {currentPage === 'admin' && isAdmin && (
