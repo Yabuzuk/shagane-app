@@ -13,7 +13,11 @@ export default function CatalogPage({ products, onAddToCart }) {
         {products.map(product => (
           <div key={product.id} className="product-card">
             <div className="product-image">
-              {product.icon}
+              {product.image ? (
+                <img src={product.image} alt={product.name} />
+              ) : (
+                product.icon
+              )}
             </div>
             <div className="product-info">
               <div className="product-name">{product.name}</div>

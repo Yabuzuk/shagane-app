@@ -24,7 +24,13 @@ export default function CartPage({ cart, onUpdateQuantity, onCheckout }) {
       
       {cart.map(item => (
         <div key={item.id} className="cart-item">
-          <div className="cart-item-image">{item.icon}</div>
+          <div className="cart-item-image">
+            {item.image ? (
+              <img src={item.image} alt={item.name} />
+            ) : (
+              item.icon
+            )}
+          </div>
           <div className="cart-item-info">
             <div className="cart-item-name">{item.name}</div>
             <div className="cart-item-price">{item.price} ₽</div>

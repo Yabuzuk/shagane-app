@@ -5,12 +5,61 @@ export default function AdminPage({ products, onAddProduct, onDeleteProduct }) {
   const [formData, setFormData] = useState({
     name: '',
     price: '',
-    icon: '🍰',
+    image: '',
     description: '',
     weight: ''
   });
+  const [imagePreview, setImagePreview] = useState(null);
 
-  const icons = ['🎂', '🥐', '🍪', '🍰', '🍮', '🥖', '🧁', '🍩', '🥧', '🍫', '🍬', '🍭'];
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Создаем canvas для сжатия
+    const img = new Image();
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Устанавливаем максимальный размер 300x300
+        const maxSize = 300;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > maxSize) {
+            height *= maxSize / width;
+            width = maxSize;
+          }
+        } else {
+          if (height > maxSize) {
+            width *= maxSize / height;
+            height = maxSize;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // Конвертируем в WebP
+        canvas.toBlob((blob) => {
+          const webpReader = new FileReader();
+          webpReader.onloadend = () => {
+            const base64 = webpReader.result;
+            setFormData({...formData, image: base64});
+            setImagePreview(base64);
+          };
+          webpReader.readAsDataURL(blob);
+        }, 'image/webp', 0.8);
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,11 +67,12 @@ export default function AdminPage({ products, onAddProduct, onDeleteProduct }) {
       id: Date.now(),
       name: formData.name,
       price: Number(formData.price),
-      icon: formData.icon,
+      image: formData.image,
       description: formData.description,
       weight: formData.weight
     });
-    setFormData({ name: '', price: '', icon: '🍰', description: '', weight: '' });
+    setFormData({ name: '', price: '', image: '', description: '', weight: '' });
+    setImagePreview(null);
     setShowForm(false);
   };
 
@@ -97,31 +147,35 @@ export default function AdminPage({ products, onAddProduct, onDeleteProduct }) {
           </div>
 
           <div className="form-group">
-            <label className="form-label">Иконка</label>
-            <div style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(6, 1fr)', 
-              gap: '10px',
-              marginTop: '10px'
-            }}>
-              {icons.map(icon => (
-                <button
-                  key={icon}
-                  type="button"
-                  onClick={() => setFormData({...formData, icon})}
-                  style={{
-                    fontSize: '32px',
-                    padding: '10px',
-                    border: formData.icon === icon ? '3px solid var(--gold)' : '2px solid var(--light-green)',
+            <label className="form-label">Изображение товара</label>
+            <input 
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              style={{ display: 'none' }}
+              id="image-upload"
+            />
+            <label 
+              htmlFor="image-upload"
+              className="btn btn-secondary"
+              style={{ width: '100%', cursor: 'pointer', display: 'block', textAlign: 'center' }}
+            >
+              📎 Прикрепить изображение
+            </label>
+            {imagePreview && (
+              <div style={{ marginTop: '10px', textAlign: 'center' }}>
+                <img 
+                  src={imagePreview} 
+                  alt="Preview" 
+                  style={{ 
+                    maxWidth: '200px', 
+                    maxHeight: '200px',
                     borderRadius: '8px',
-                    background: formData.icon === icon ? 'var(--light-gold)' : 'white',
-                    cursor: 'pointer'
-                  }}
-                >
-                  {icon}
-                </button>
-              ))}
-            </div>
+                    border: '2px solid var(--light-green)'
+                  }} 
+                />
+              </div>
+            )}
           </div>
 
           <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '10px' }}>
@@ -146,16 +200,24 @@ export default function AdminPage({ products, onAddProduct, onDeleteProduct }) {
             gap: '15px'
           }}>
             <div style={{
-              fontSize: '40px',
               width: '60px',
               height: '60px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               background: 'white',
-              borderRadius: '8px'
+              borderRadius: '8px',
+              overflow: 'hidden'
             }}>
-              {product.icon}
+              {product.image ? (
+                <img 
+                  src={product.image} 
+                  alt={product.name}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              ) : (
+                <span style={{ fontSize: '40px' }}>{product.icon}</span>
+              )}
             </div>
             <div style={{ flex: 1 }}>
               <div style={{ fontWeight: '600', color: 'var(--dark-green)' }}>
