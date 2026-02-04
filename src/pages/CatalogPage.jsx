@@ -14,7 +14,8 @@ export default function CatalogPage({ products, onAddToCart }) {
       
       <div className="product-grid">
         {products.map(product => (
-          <div key={product.id} className="product-card" onClick={() => setSelectedProduct(product)}>
+          <div key={product.id} className="product-card">
+            <div onClick={() => setSelectedProduct(product)} style={{ cursor: 'pointer' }}>
             <div className="product-image">
               {product.image ? (
                 <img src={product.image} alt={product.name} />
@@ -27,7 +28,28 @@ export default function CatalogPage({ products, onAddToCart }) {
               <div style={{ fontSize: '12px', color: 'var(--medium-green)', marginBottom: '8px' }}>
                 {product.weight}
               </div>
-              <div className="product-price">{product.price} ₽</div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div className="product-price">{product.price} ₽</div>
+                <button
+                  className="btn btn-primary"
+                  style={{
+                    width: '36px',
+                    height: '36px',
+                    padding: '0',
+                    borderRadius: '50%',
+                    fontSize: '20px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onAddToCart(product);
+                  }}
+                >
+                  +
+                </button>
+              </div>
             </div>
           </div>
         ))}
