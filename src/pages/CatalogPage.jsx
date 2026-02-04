@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { mockProducts } from '../data/mockData';
+import ProductModal from '../components/ProductModal';
 
 export default function CatalogPage({ products, onAddToCart }) {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
   return (
     <div className="container">
       <h2 style={{ color: 'var(--dark-green)', marginBottom: '10px' }}>Наши десерты</h2>
@@ -11,7 +14,7 @@ export default function CatalogPage({ products, onAddToCart }) {
       
       <div className="product-grid">
         {products.map(product => (
-          <div key={product.id} className="product-card">
+          <div key={product.id} className="product-card" onClick={() => setSelectedProduct(product)}>
             <div className="product-image">
               {product.image ? (
                 <img src={product.image} alt={product.name} />
@@ -25,17 +28,16 @@ export default function CatalogPage({ products, onAddToCart }) {
                 {product.weight}
               </div>
               <div className="product-price">{product.price} ₽</div>
-              <button 
-                className="btn btn-primary" 
-                style={{ width: '100%', marginTop: '10px', padding: '8px' }}
-                onClick={() => onAddToCart(product)}
-              >
-                В корзину
-              </button>
             </div>
           </div>
         ))}
       </div>
+
+      <ProductModal 
+        product={selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        onAddToCart={onAddToCart}
+      />
     </div>
   );
 }
