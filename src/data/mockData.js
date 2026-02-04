@@ -1,51 +1,51 @@
 export const mockProducts = [
   {
     id: 1,
-    name: 'Торт Наполеон',
-    price: 1200,
-    image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=300&h=300&fit=crop',
-    description: 'Классический торт с нежным кремом',
-    weight: '1 кг'
+    name: 'Дубайский шоколад',
+    price: 510,
+    image: 'https://thumbor.uds.app/unsafe/300x300//game-prod/549756148736/GOODS/1b866841-816f-4342-843b-8832ae334d11',
+    description: '100% фисташковая паста, премиум-качество',
+    weight: '100 г'
   },
   {
     id: 2,
-    name: 'Эклеры',
-    price: 450,
-    image: 'https://images.unsplash.com/photo-1612201142855-c7a9b44c9c4e?w=300&h=300&fit=crop',
-    description: 'Французские пирожные с кремом',
-    weight: '6 шт'
+    name: 'Торт "ПОБЕДА"',
+    price: 1950,
+    image: 'https://thumbor.uds.app/unsafe/300x300//game-prod/549756148736/GOODS/bb63a9da-2143-4bb7-be79-421e5d9ae873',
+    description: 'Орехово-белковые коржи с кедровыми орешками и брусникой',
+    weight: '1 кг'
   },
   {
     id: 3,
-    name: 'Макаруны',
-    price: 600,
-    image: 'https://images.unsplash.com/photo-1569864358642-9d1684040f43?w=300&h=300&fit=crop',
-    description: 'Разноцветные миндальные печенья',
-    weight: '12 шт'
+    name: 'Эклер ванильный',
+    price: 145,
+    image: 'https://thumbor.uds.app/unsafe/300x300//game-prod/549756148736/GOODS/44bad0eb-f111-4f3d-9e97-4c59f3bf8f81',
+    description: 'Ванильный крем дипломат с натуральной ванилью',
+    weight: '1 шт'
   },
   {
     id: 4,
-    name: 'Чизкейк',
-    price: 950,
-    image: 'https://images.unsplash.com/photo-1533134486753-c833f0ed4866?w=300&h=300&fit=crop',
-    description: 'Нежный творожный десерт',
-    weight: '800 г'
+    name: 'Боул с курицей и ананасом',
+    price: 500,
+    image: 'https://thumbor.uds.app/unsafe/300x300//game-prod/549756148736/GOODS/5e1075d9-3549-4ef0-a83b-08bb47ee9fd1',
+    description: 'Нежная курица сувид с рисом и соусом карри',
+    weight: '300 г'
   },
   {
     id: 5,
-    name: 'Тирамису',
-    price: 850,
-    image: 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=300&h=300&fit=crop',
-    description: 'Итальянский десерт с маскарпоне',
-    weight: '600 г'
+    name: 'Хачапури по-аджарски',
+    price: 1040,
+    image: 'https://thumbor.uds.app/unsafe/300x300//game-prod/549756148736/GOODS/c77c37b6-34a3-4bac-a8a5-fe08f6bdcd65',
+    description: 'Традиционное грузинское блюдо',
+    weight: '450 г'
   },
   {
     id: 6,
-    name: 'Круассаны',
-    price: 350,
-    image: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=300&h=300&fit=crop',
-    description: 'Свежая французская выпечка',
-    weight: '4 шт'
+    name: 'Куриные крылышки',
+    price: 415,
+    image: 'https://thumbor.uds.app/unsafe/300x300//game-prod/549756148736/GOODS/abc37ad9-c6a5-49f8-9417-0baad3325e30',
+    description: 'Хрустящие крылышки с паприкой',
+    weight: '6 шт'
   }
 ];
 
