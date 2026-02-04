@@ -85,9 +85,21 @@ export default function App() {
   };
 
   const handleOrderComplete = (orderData) => {
-    setOrders([...orders, { ...orderData, user }]);
+    const newOrder = { 
+      ...orderData, 
+      user,
+      status: 'new',
+      createdAt: new Date().toISOString()
+    };
+    setOrders([...orders, newOrder]);
     setCart([]);
     setCurrentPage('orders');
+  };
+
+  const handleUpdateOrderStatus = (orderIndex, newStatus) => {
+    const updatedOrders = [...orders];
+    updatedOrders[orderIndex] = { ...updatedOrders[orderIndex], status: newStatus };
+    setOrders(updatedOrders);
   };
 
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -132,7 +144,12 @@ export default function App() {
       )}
       
       {currentPage === 'orders' && (
-        <OrdersPage orders={orders} isAdmin={isAdmin} currentUserId={user?.id} />
+        <OrdersPage 
+          orders={orders} 
+          isAdmin={isAdmin} 
+          currentUserId={user?.id}
+          onUpdateStatus={handleUpdateOrderStatus}
+        />
       )}
 
       {currentPage === 'admin' && isAdmin && (
