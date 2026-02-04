@@ -16,12 +16,13 @@ export default function CatalogPage({ products, onAddToCart }) {
         {products.map(product => (
           <div key={product.id} className="product-card">
             <div onClick={() => setSelectedProduct(product)} style={{ cursor: 'pointer' }}>
-            <div className="product-image">
-              {product.image ? (
-                <img src={product.image} alt={product.name} />
-              ) : (
-                product.icon
-              )}
+              <div className="product-image">
+                {product.image ? (
+                  <img src={product.image} alt={product.name} />
+                ) : (
+                  product.icon
+                )}
+              </div>
             </div>
             <div className="product-info">
               <div className="product-name">{product.name}</div>
