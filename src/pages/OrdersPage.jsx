@@ -60,7 +60,24 @@ export default function OrdersPage({ orders, isAdmin, currentUserId, onUpdateSta
                 </div>
                 <div style={{ fontSize: '14px', color: 'var(--medium-green)', marginTop: '5px' }}>
                   {order.user.first_name} {order.user.last_name || ''}
-                  {order.user.username && ` (@${order.user.username})`}
+                  {order.user.username && (
+                    <>
+                      {' ('}
+                      <a 
+                        href={`https://t.me/${order.user.username}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          color: 'var(--gold)',
+                          textDecoration: 'none',
+                          fontWeight: '600'
+                        }}
+                      >
+                        @{order.user.username}
+                      </a>
+                      {')'}
+                    </>
+                  )}
                 </div>
                 <div style={{ fontSize: '14px', color: 'var(--medium-green)' }}>
                   {order.phone}
