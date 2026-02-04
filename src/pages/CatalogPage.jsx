@@ -26,10 +26,10 @@ export default function CatalogPage({ products, onAddToCart }) {
             </div>
             <div className="product-info">
               <div className="product-name">{product.name}</div>
-              <div style={{ fontSize: '12px', color: 'var(--medium-green)', marginBottom: '8px' }}>
+              <div style={{ fontSize: '12px', color: 'var(--medium-green)', marginBottom: 'auto' }}>
                 {product.weight}
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px' }}>
                 <div className="product-price">{product.price} ₽</div>
                 <button
                   className="btn btn-primary"
