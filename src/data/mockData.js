@@ -46,6 +46,46 @@ export const mockProducts = [
     image: 'https://thumbor.uds.app/unsafe/300x300//game-prod/549756148736/GOODS/abc37ad9-c6a5-49f8-9417-0baad3325e30',
     description: 'Хрустящие крылышки с паприкой',
     weight: '6 шт'
+  },
+  {
+    id: 7,
+    name: 'Булочка Маритоццо',
+    price: 190,
+    image: 'https://thumbor.uds.app/unsafe/300x300//game-prod/549756148736/GOODS/6ab88320-768b-4739-ab55-b3d50955d98b',
+    description: 'Мягкое воздушное тесто, нежный крем, украшен клубникой',
+    weight: '1 шт'
+  },
+  {
+    id: 8,
+    name: 'Десерт "Дубайский шоколад"',
+    price: 480,
+    image: 'https://thumbor.uds.app/unsafe/300x300//game-prod/549756148736/GOODS/78d8f078-8a1f-49a8-9a89-8f9395261e9c',
+    description: '100% фисташковая паста, оригинальное тесто',
+    weight: '1 шт'
+  },
+  {
+    id: 9,
+    name: 'Пирожок с мясом',
+    price: 110,
+    image: 'https://thumbor.uds.app/unsafe/300x300//game-prod/549756148736/GOODS/028c94bf-c506-4adc-b94f-80c5e1115518',
+    description: 'Свежая выпечка',
+    weight: '100 г'
+  },
+  {
+    id: 10,
+    name: 'Салат "Витаминный"',
+    price: 865,
+    image: 'https://thumbor.uds.app/unsafe/300x300//game-prod/549756148736/GOODS/fccd86b4-42e4-47b0-a1e2-1576ed4c37bb',
+    description: 'Хрустящая капуста и свежая морковь',
+    weight: '1 кг'
+  },
+  {
+    id: 11,
+    name: 'Салат "Острый с говядиной"',
+    price: 300,
+    image: 'https://thumbor.uds.app/unsafe/300x300//game-prod/549756148736/GOODS/86ce8a0f-d638-4f20-8772-f52199a96427',
+    description: 'Нежная говядина, свежие овощи и пикантные соусы',
+    weight: '150 г'
   }
 ];
 
